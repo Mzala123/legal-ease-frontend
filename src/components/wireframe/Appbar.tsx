@@ -15,7 +15,7 @@ type AppBarProps = {
 export default function Appbar({onToggleMenu, isOpen}: AppBarProps) {
 
     return (
-            <div className={`flex justify-between h-16 py-2 px-4 border-b border-stone-300 fixed z-20 bg-white w-full transition-all ease-in-out lg:${isOpen ? "w-[calc(100%-288px)]" : "w-full"} `}>
+            <div className={`flex justify-between h-16 py-2 px-4 border-b border-stone-300 fixed z-20 bg-white w-full transition-all ease-in-out lg:${isOpen ? "w-[calc(100%-288px)]" : "w-full"}`}>
                 <div className="flex items-center gap-2">
                     <div><PanelLeft onClick={onToggleMenu} className="cursor-pointer"/></div>
                     <div>
@@ -37,11 +37,11 @@ export default function Appbar({onToggleMenu, isOpen}: AppBarProps) {
                                     <div className="flex justify-center items-center rounded-full border bg-stone-50 size-10 hover:bg-white shadow-none">
                                         <User className="stroke-black" size={24}/>
                                     </div>
-                                    <span className="text-sm">Mtende J</span>
+                                    <span className="text-sm hidden lg:flex">Mtende J</span>
                                     <ChevronsUpDown size={18}/>
                                 </div>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className="relative lg:right-4">
+                            <DropdownMenuContent className="relative right-2 lg:right-4">
                                 <DropdownMenuLabel className="font-bold">My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem className="gap-2">
