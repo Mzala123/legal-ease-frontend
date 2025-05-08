@@ -1,7 +1,6 @@
 
 type SideBarProps = {
     isOpen: boolean
-    // onToggleMenu: () => void
 }
 
 export default function Sidebar({isOpen}: SideBarProps) {
