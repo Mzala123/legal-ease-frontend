@@ -87,3 +87,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .scrollbar-thin{
+    scrollbar-width: thin !important;
+  }
+  .scrollbar-thumb-rounded{
+    scrollbar-color: #a3a3a3 transparent !important;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+    background-color: #a3a3a3 !important;
+    /*border-radius: px;*/
+  }
+  .scrollbar-thumb-rounded::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+}

@@ -1,11 +1,11 @@
-import {LayoutDashboard, LibraryBig, SettingsIcon, ShieldUser} from "lucide-react";
+import {LayoutDashboard, LibraryBig, SettingsIcon, ShieldUser, UserCircle} from "lucide-react";
 import {JSX} from "react";
 
 export type MenuItem = {
     id: string,
     title: string,
     path: string,
-    icon: JSX.Element
+    icon?: JSX.Element
     children?: MenuItem[]
 }
 
@@ -15,6 +15,12 @@ const adminMenu: MenuItem [] = [
       title: "Dashboard",
       path: "/home/dashboard",
       icon: <LayoutDashboard size={16}/>
+    },
+    {
+        id: "users",
+        title: "Users",
+        path: "/home/users",
+        icon: <UserCircle size={16}/>
     },
     {
         id: "configuration",
@@ -47,13 +53,9 @@ const adminMenu: MenuItem [] = [
                 title: "setting ease users",
                 path: "/configurations/settings-ease-users",
                 icon: <ShieldUser size={16}/>,
-            },
-            {
-                id: "settings-legal-cases",
-                title: "Cases setting",
-                path: "/configurations/setting-ease-cases",
-                icon: <LibraryBig size={16}/>,
             }
+
+
         ]
     }
 ]

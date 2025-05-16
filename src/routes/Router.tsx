@@ -17,6 +17,10 @@ const routes = createBrowserRouter(
                 {
                   path: "dashboard",
                   element: <Register/>
+                },
+                {
+                    path: "users",
+                    element: <Register/>
                 }
             ]
         }
