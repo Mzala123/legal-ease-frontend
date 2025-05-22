@@ -30,7 +30,7 @@ function Layout() {
     }, [isOpen])
 
     return (
-        <div className={`flex h-screen w-full bg-stone-200`}>
+        <div className={`flex h-screen w-full bg-stone-100`}>
 
                 <div className={`transition-all ease-in-out h-screen`}>
                     <Sidebar isOpen={isOpen}/>

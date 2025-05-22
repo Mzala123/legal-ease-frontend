@@ -3,8 +3,8 @@ import {
     ChevronsUpDown,
     CircleHelp,
     ExternalLink,
-    LogOut,
-    Settings, SquareMenu,
+    LogOut, Menu,
+    Settings,
     User
 } from "lucide-react";
 import {
@@ -25,7 +25,7 @@ export default function Appbar({onToggleMenu, isOpen}: AppBarProps) {
     return (
         <div className={cn("flex justify-between h-16 py-2 px-4 border-b border-stone-300 fixed z-20 bg-white w-full transition-all ease-in-out", isOpen && "lg:w-[calc(100%-288px)]")}>
             <div className="flex items-center gap-2">
-                <div><SquareMenu onClick={onToggleMenu} className="cursor-pointer stroke-stone-600"/></div>
+                <div className={"p-1 border-stone-300 rounded-sm border"}><Menu onClick={onToggleMenu} className="cursor-pointer stroke-stone-600"/></div>
                 <div>
                     {/*legalEase*/}
                 </div>
