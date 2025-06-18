@@ -10,6 +10,7 @@ export default {
 		fontFamily: {
 			Poppins: ['Poppins'],
 			Poppins_Bold: ['Poppins-Bold'],
+			Poppins_Semibold: ['Poppins-Semibold'],
 			Martian: ['Martian']
 		},
   		borderRadius: {

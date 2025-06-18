@@ -17,6 +17,11 @@
     src: url('fonts/poppins/Poppins-Bold.otf')
 }
 
+@font-face {
+  font-family: 'Poppins-Semibold';
+  src: url('fonts/poppins/Poppins-SemiBold.otf')
+}
+
 *{
     font-family: 'Poppins';
     box-sizing:border-box;
@@ -25,6 +30,7 @@
 
 @layer base {
 
+
   :root {
     --background: 0 0% 98.82%;
     --foreground: 0 0% 9.02%;
@@ -32,9 +38,9 @@
     --card-foreground: 0 0% 9.02%;
     --popover: 0 0% 98.82%;
     --popover-foreground: 0 0% 32.16%;
-    --primary: 112.86 100% 32.94%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 122 63% 44%;
+    --primary: 114.29 100% 32.94%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 	122 63% 44%;
     --secondary-foreground: 0 0% 9.02%;
     --muted: 0 0% 92.94%;
     --muted-foreground: 0 0% 12.55%;
@@ -42,22 +48,22 @@
     --accent-foreground: 0 0% 12.55%;
     --destructive: 9.89 81.98% 43.53%;
     --destructive-foreground: 0 100% 99.41%;
-    --border: 0 0% 81.96%;
+    --border: 0 0% 47.06%;
     --input: 0 0% 96.47%;
-    --ring: 0 0% 9.02%;
-    --chart-1: 122 63% 44%;
+    --ring: 0 0% 0%;
+    --chart-1: 	122 63% 44%;
     --chart-2: 217.22 91.22% 59.80%;
     --chart-3: 258.31 89.53% 66.27%;
     --chart-4: 37.69 92.13% 50.20%;
     --chart-5: 112.86 100% 32.94%;
     --sidebar: 0 0% 98.82%;
     --sidebar-foreground: 0 0% 43.92%;
-    --sidebar-primary: 122 63% 44%;
+    --sidebar-primary: 	122 63% 44%;
     --sidebar-primary-foreground: 153.33 13.04% 13.53%;
     --sidebar-accent: 0 0% 92.94%;
     --sidebar-accent-foreground: 0 0% 12.55%;
     --sidebar-border: 0 0% 87.45%;
-    --sidebar-ring: 122 63% 44%;
+    --sidebar-ring: 	122 63% 44%;
     --font-sans: Outfit, sans-serif;
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     --font-mono: monospace;
@@ -119,6 +125,8 @@
     --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 8px 10px -1px hsl(0 0% 0% / 0.17);
     --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
   }
+
+
 }
 
 @layer base {

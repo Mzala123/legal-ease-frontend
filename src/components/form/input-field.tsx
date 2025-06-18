@@ -2,6 +2,7 @@ import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessag
 import {Control, FieldValues, Path} from "react-hook-form";
 import {InputHTMLAttributes} from "react";
 import {Input} from "@/components/ui/input.tsx";
+import {cn} from "@/utils.ts";
 
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string,
@@ -20,7 +21,7 @@ export default function InputField<T extends FieldValues>({control, label, isReq
             name={props.name}
             render={({field})=> (
                 <FormItem>
-                  <FormLabel>{label}{" "}{isRequired && <span className="font-bold text-destructive">*</span>} </FormLabel>
+                  <FormLabel className={cn("text-foreground")}>{label}{" "}{isRequired && <span className="font-bold text-destructive">*</span>} </FormLabel>
                     <FormControl>
                         <Input {...props} {...field} onChange={({target})=>{
                             if(props.type === "number") {

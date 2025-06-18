@@ -5,13 +5,10 @@ import {Link, useLocation} from "react-router-dom";
 import {useState} from "react";
 
 
-
-
 function SubmenuDropdown({menuList}: {menuList: MenuItem[]}) {
     const location = useLocation();
     const [openSubmenuId, setOpenSubmenuId] = useState<string[]>([]);
     function toggleSubmenu(parentId: string) {
-        console.log(openSubmenuId);
         setOpenSubmenuId(
             prevState => prevState.includes(parentId) ?  prevState.filter(id=> id !== parentId) :
                 [
@@ -19,7 +16,6 @@ function SubmenuDropdown({menuList}: {menuList: MenuItem[]}) {
                     parentId
                 ]
         );
-        console.log(openSubmenuId);
     }
 
     return (

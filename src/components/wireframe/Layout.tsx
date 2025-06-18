@@ -30,12 +30,11 @@ function Layout() {
     }, [isOpen])
 
     return (
-        <div className={`flex h-screen w-full bg-stone-100`}>
-
+        <div className={`flex h-screen w-full bg-white`}>
                 <div className={`transition-all ease-in-out h-screen`}>
                     <Sidebar isOpen={isOpen}/>
                 </div>
-              <div className={cn(`flex flex-col w-full relative transition-all ease-in-out`, isOpen && "lg:ml-72")}>
+              <div className={cn(`flex flex-col w-full relative transition-all ease-in-out`, isOpen && "lg:ml-64")}>
                  <Appbar onToggleMenu={handleToggleMenu} isOpen={isOpen}/>
                  <div className="justify-center mt-20 mx-4 mb-4 flex-1 transition-all overflow-y-auto ease-in-out rounded-lg">
                     <Outlet/>
