@@ -8,6 +8,9 @@ import InputField from "@/components/form/input-field.tsx";
 import {Form} from "@/components/ui/form.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Info} from "lucide-react";
+import {useQuery} from "@tanstack/react-query";
+import {getOneCaseCategory} from "@/services/endpoints.ts";
+import PageLoader from "@/components/ui/page-loader.tsx";
 
 
 
@@ -20,7 +23,8 @@ const formSchema = z.object({
 function CaseCategoryCreate() {
 
     const  params = useParams();
-    const primaryKey = isPrimaryKey(params.case_id as unknown as number);
+    const primaryKey = isPrimaryKey(params.case_id as unknown as string);
+
 
 
 
@@ -28,81 +32,103 @@ function CaseCategoryCreate() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             category_name: "",
-            category_code: "",
-            case_description: ""
+            category_code:  "",
+            case_description:  ""
         }
     })
 
+    const {isLoading, isFetching} = useQuery({
+        queryKey: ["case-category",primaryKey],
+        enabled: !!primaryKey,
+        queryFn: () => getOneCaseCategory(params.case_id as unknown as string).then(({data}) =>{
+            form.reset({
+                category_name: data.category_name,
+                category_code: data.category_code,
+                case_description: data.case_description
+            });
+            return data;
+        }),
+    })
+
+
+    // console.log(caseCategory)
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }
 
 
+
     return (
         <div className={cn("")}>
             <div className={cn("flex flex-col gap-4 text-sm mx-auto lg:w-[80%] 2xl:w-[65%] ")}>
                 <div className={cn("flex items-end")}>
-                    <p>Breadcrumb / Configurations / Case category</p>
+                    <p className={"mt-2"}>Breadcrumb / Configurations / Case category</p>
                 </div>
                 <div className={cn("flex flex-col gap-3")}>
                     <div className={cn("flex gap-4 items-end")}>
                         {/*<Button className={cn("bg-accent text-black")}>Back</Button>*/}
                         <h2 className="text-xl font-Poppins_Semibold text-stone-800">
-                            {primaryKey ? "Edit" : "Case Category Add"}
+                            {primaryKey ? "Update category edit" : "New case category"}
                         </h2>
                     </div>
-                    <div className={cn("flex justify-center mt-6")}>
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-6 w-[400px]")}>
-                            <div className={cn("flex flex-col gap-2")}>
-                                <p className="text-sm flex gap-1 items-center">
-                                    <span><Info size={16} className={"stroke-primary"}/></span>
-                                    <span>Case categories instances include crime, civil.</span>
-                                </p>
-                                <p className="text-xs">Required fields are marked with an asterisk  <span className="text-destructive">*</span></p>
+
+                    {
+                        ( (isFetching || isFetching)  ? <PageLoader loading={isLoading}/> :
+                            <div className={cn("flex justify-center mt-6")}>
+                                <Form {...form}>
+                                    <form onSubmit={form.handleSubmit(onSubmit)} className={cn("space-y-6 w-[400px]")}>
+                                        <div className={cn("flex flex-col gap-2")}>
+                                            <p className="text-sm flex gap-1 items-center">
+                                                <span><Info size={16} className={"stroke-primary"}/></span>
+                                                <span>Case categories instances include crime, civil.</span>
+                                            </p>
+                                            <p className="text-xs">Required fields are marked with an asterisk  <span className="text-destructive">*</span></p>
+                                        </div>
+                                        <InputField
+                                            name="category_name"
+                                            control={form.control}
+                                            label="Category name"
+                                            type="text"
+                                            placeholder=""
+                                            isRequired={true}
+                                            className={cn("w-full")}
+                                        />
+
+                                        <InputField
+                                            name="category_code"
+                                            control={form.control}
+                                            label="Category code"
+                                            type="text"
+                                            placeholder=""
+                                            className={cn("w-full")}
+                                        />
+
+                                        <InputField
+                                            name="case_description"
+                                            control={form.control}
+                                            label="Category description"
+                                            type="text"
+                                            placeholder=""
+                                            isRequired={true}
+                                        />
+
+                                        <div>
+                                            <Button
+                                                type={"submit"}
+                                                disabled={!form.formState.isValid || !form.formState.isDirty}
+                                                className={cn("font-Poppins_Semibold", (!form.formState.isValid || !form.formState.isDirty) && "bg-accent text-stone-400 cursor-not-allowed")}
+                                            >
+                                                Save
+                                            </Button>
+                                        </div>
+
+                                    </form>
+                                </Form>
                             </div>
-                            <InputField
-                                name="category_name"
-                                control={form.control}
-                                label="Category name"
-                                type="text"
-                                placeholder=""
-                                isRequired={true}
-                                className={cn("w-full")}
-                            />
+                        )
+                    }
 
-                            <InputField
-                                name="category_code"
-                                control={form.control}
-                                label="Category code"
-                                type="text"
-                                placeholder=""
-                                className={cn("w-full")}
-                            />
-
-                            <InputField
-                                name="case_description"
-                                control={form.control}
-                                label="Category description"
-                                type="text"
-                                placeholder=""
-                                isRequired={true}
-                            />
-
-                            <div>
-                                <Button
-                                    type={"submit"}
-                                    disabled={!form.formState.isValid || !form.formState.isDirty}
-                                    className={cn("font-Poppins_Semibold", (!form.formState.isValid || !form.formState.isDirty) && "bg-accent text-stone-400 cursor-not-allowed")}
-                                >
-                                    Save
-                                </Button>
-                            </div>
-
-                            </form>
-                        </Form>
-                    </div>
                 </div>
             </div>
 

@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-export function isPrimaryKey(key: number | "+" | undefined) {
+export function isPrimaryKey(key: string | "+" | undefined) {
     return key && key !== "+" ? key : false;
 }
 
