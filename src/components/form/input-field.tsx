@@ -20,8 +20,8 @@ export default function InputField<T extends FieldValues>({control, label, isReq
             control={control}
             name={props.name}
             render={({field})=> (
-                <FormItem>
-                  <FormLabel className={cn("text-foreground")}>{label}{" "}{isRequired && <span className="font-bold text-destructive">*</span>} </FormLabel>
+                <FormItem className="">
+                  <FormLabel className={cn("font-Poppins_Semibold text-stone-800 text-xs")}>{label}{" "}{isRequired && <span className="font-bold text-destructive">*</span>} </FormLabel>
                     <FormControl>
                         <Input {...props} {...field} onChange={({target})=>{
                             if(props.type === "number") {

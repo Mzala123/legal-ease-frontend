@@ -36,7 +36,7 @@ function Layout() {
                 </div>
               <div className={cn(`flex flex-col w-full relative transition-all ease-in-out`, isOpen && "lg:ml-64")}>
                  <Appbar onToggleMenu={handleToggleMenu} isOpen={isOpen}/>
-                 <div className="justify-center mt-20 mx-4 mb-4 flex-1 transition-all overflow-y-auto ease-in-out rounded-lg">
+                 <div className="justify-center mt-16 mx-4 mb-4 flex-1 transition-all overflow-y-auto ease-in-out">
                     <Outlet/>
                 </div>
              </div>

@@ -1,8 +1,7 @@
 import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Form
-} from "@/components/ui/form.tsx";
+import {Form} from "@/components/ui/form.tsx";
 import {cn} from "@/utils.ts";
 import InputField from "@/components/form/input-field.tsx";
 import {Button} from "@/components/ui/button.tsx";
@@ -19,7 +18,7 @@ const formSchema = z.object({
     }),
 })
 
-export function Login() {
+export default function Login() {
 
     const navigate = useNavigate();
 

@@ -29,9 +29,15 @@ const adminMenu: MenuItem [] = [
         icon: <Columns3Cog size={16}/>,
         children: [
             {
-                id: "configuration-case-category",
+               id: "roles",
+               title: "Roles",
+               path: "/home/configurations/roles",
+               icon: <ShieldUser size={16}/>
+            },
+            {
+                id: "case-category",
                 title: "Case category",
-                path: "/configurations/configuration-case-category",
+                path: "/home/configurations/case-category",
                 icon: <Group size={16}/>,
             }
         ]

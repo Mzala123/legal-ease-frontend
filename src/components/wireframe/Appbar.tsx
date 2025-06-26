@@ -2,7 +2,7 @@ import {
     Bell,
     CircleHelp,
     ExternalLink, HelpCircle,
-    LogOut, PanelBottomClose, PanelTopClose,
+    LogOut, PanelBottomClose, PanelTopClose, Search,
     Settings,
     User
 } from "lucide-react";
@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu.tsx";
 import {cn} from "@/utils.ts";
 
+import {Input} from "@/components/ui/input.tsx";
+
 type AppBarProps = {
     onToggleMenu: () => void,
     isOpen : boolean,
@@ -24,13 +26,20 @@ export default function Appbar({onToggleMenu, isOpen}: AppBarProps) {
     return (
         <div className={cn("bg-white flex justify-between h-12 py-2 px-4 border-b border-stone-300 fixed z-20  w-full transition-all ease-in-out", isOpen && "lg:w-[calc(100%-256px)]")}>
             <div className="flex items-center gap-2">
-                <div className={"p-1"}>
+                <div>
                     {!isOpen ? <PanelTopClose size={20} strokeWidth={2} onClick={onToggleMenu} className="cursor-pointer rotate-90 "/>
                         : <PanelBottomClose size={20} strokeWidth={2} onClick={onToggleMenu} className="cursor-pointer rotate-90"/> }
                 </div>
                 <div>
                     {/*legalEase*/}
                 </div>
+            </div>
+            <div className="flex items-center">
+                <div className={"relative flex items-center"}>
+                    <Search strokeWidth={2} size={18} className={cn("absolute ml-2 stroke-stone-600")}/>
+                    <Input name={"search"} placeholder="Search" onFocus={()=>{}} className={cn("h-8 pl-8 lg:w-[420px] 2xl:w-[620px]",)}></Input>
+                </div>
+
             </div>
             <div className="flex items-center relative gap-2">
                 <div className="flex items-center gap-1">

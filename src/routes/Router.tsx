@@ -1,26 +1,59 @@
 import {createBrowserRouter} from "react-router-dom";
-import Layout from "../components/wireframe/Layout.tsx";
-import {Login} from "@/pages/auth/Login.tsx";
-import {Register} from "@/pages/auth/Register.tsx";
+import * as React from "react";
+import SuspendedPage from "../components/SuspendedPage.tsx";
+import {isPrimaryKey} from "@/lib/utils.ts";
 
+const Layout = React.lazy(()=>import("../components/wireframe/Layout"))
+const Login = React.lazy(()=>import("../pages/auth/Login"))
+const Register = React.lazy(()=>import("../pages/auth/Register"))
+
+const Roles = React.lazy(()=>import("../pages/configurations/roles"))
+const CaseCategoryList = React.lazy(()=>import("../pages/configurations/cases/case-category"))
+const CaseCategoryCreate = React.lazy(()=>import("../pages/configurations/cases/case-category-create"))
 
 const routes = createBrowserRouter(
     [
         {
             path: '/',
-            element: <Login/>
+            element: <SuspendedPage page={<Login/>}/>
         },
         {
             path:"/home",
-            element: <Layout/>,
+            element: <SuspendedPage page={<Layout/>}/>,
             children: [
                 {
                   path: "dashboard",
-                  element: <Register/>
+                  element: <SuspendedPage page={<Register/>}/>
                 },
                 {
                     path: "users",
-                    element: <Register/>
+                    element: <SuspendedPage page={<Register/>}/>
+                },
+                {
+                    path: "configurations",
+                    children: [
+                        {
+                            path: "roles",
+                            element: <SuspendedPage page={<Roles/>}/>
+                        },
+                        {
+                            path: "case-category",
+                            children: [
+                                {
+                                    path: "",
+                                    element: <SuspendedPage page={<CaseCategoryList/>}/>,
+                                },
+                                {
+                                    path: ":case_id",
+                                    loader: ({params})=>{
+                                        return {pageName: isPrimaryKey(params.case_id as unknown as number) ? "Edit" : "Add"}
+                                    },
+                                    element: <SuspendedPage page={<CaseCategoryCreate/>}/>
+                                }
+                            ]
+
+                        }
+                    ]
                 }
             ]
         }

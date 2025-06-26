@@ -26,6 +26,7 @@
     font-family: 'Poppins';
     box-sizing:border-box;
     margin: 0;
+    color: black;
 }
 
 @layer base {

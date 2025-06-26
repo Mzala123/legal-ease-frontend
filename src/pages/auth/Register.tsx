@@ -1,6 +1,6 @@
 
 
-export function Register() {
+export default function Register() {
     return (
         <div>
            hie
