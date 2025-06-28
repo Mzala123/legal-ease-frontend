@@ -11,6 +11,7 @@ import {Info} from "lucide-react";
 import {useQuery} from "@tanstack/react-query";
 import {getOneCaseCategory} from "@/services/endpoints.ts";
 import PageLoader from "@/components/ui/page-loader.tsx";
+import TextareaField from "@/components/form/textarea-field.tsx";
 
 
 
@@ -61,9 +62,9 @@ function CaseCategoryCreate() {
 
     return (
         <div className={cn("")}>
-            <div className={cn("flex flex-col gap-4 text-sm mx-auto lg:w-[80%] 2xl:w-[65%] ")}>
+            <div className={cn("flex flex-col gap-4 text-sm mx-auto lg:w-[80%] 2xl:w-[60%] ")}>
                 <div className={cn("flex items-end")}>
-                    <p className={"mt-2"}>Breadcrumb / Configurations / Case category</p>
+                    <p className={"mt-2 text-stone-500"}>Breadcrumb / Configurations / Case category</p>
                 </div>
                 <div className={cn("flex flex-col gap-3")}>
                     <div className={cn("flex gap-4 items-end")}>
@@ -104,11 +105,10 @@ function CaseCategoryCreate() {
                                             className={cn("w-full")}
                                         />
 
-                                        <InputField
+                                        <TextareaField
                                             name="case_description"
                                             control={form.control}
                                             label="Category description"
-                                            type="text"
                                             placeholder=""
                                             isRequired={true}
                                         />

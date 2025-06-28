@@ -46,7 +46,7 @@ const routes = createBrowserRouter(
                                 {
                                     path: ":case_id",
                                     loader: ({params})=>{
-                                        return {pageName: isPrimaryKey(params.case_id as unknown as number) ? "Edit" : "Add"}
+                                        return {pageName: isPrimaryKey(params.case_id as unknown as string) ? "Edit" : "Add"}
                                     },
                                     element: <SuspendedPage page={<CaseCategoryCreate/>}/>
                                 }
