@@ -1,8 +1,8 @@
 import http from "@/services/api.ts";
 
 
-export function createCaseCategory(){
-
+export function createCaseCategory(data: Record<string, any>) {
+   return http.post(`/case-category`, data)
 }
 
 export function getOneCaseCategory(id:string){
@@ -10,11 +10,11 @@ export function getOneCaseCategory(id:string){
 }
 
 export function getAllCaseCategories(){
-   return http.get(`/case-category`)
+   return http.get<Record<string, number | boolean | string>[]>(`/case-category`)
 }
 
-export function updateCaseCategory(){
-
+export function updateCaseCategory(id:string,data:Record<string, any>){
+      return http.put(`/case-category/${id}`, data)
 }
 
 export function deleteOneCaseCategory(){

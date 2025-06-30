@@ -31,7 +31,7 @@ function Layout() {
 
     return (
         <div className={`flex h-screen w-full bg-white`}>
-                <div className={`transition-all ease-in-out h-screen`}>
+                <div className={cn(`transition-all ease-in-out h-screen`)}>
                     <Sidebar isOpen={isOpen}/>
                 </div>
               <div className={cn(`flex flex-col w-full relative transition-all ease-in-out`, isOpen && "lg:ml-64")}>
