@@ -61,8 +61,6 @@ export default function Appbar({onToggleMenu, isOpen}: AppBarProps) {
                                 <div className="flex justify-center items-center bg-destructive rounded-full border-stone-300 size-7 shadow-none">
                                     <span className="text-xs font-Poppins_Semibold text-white text-center">MJ</span>
                                 </div>
-                                {/*<span className="text-sm hidden lg:flex">Mtende J</span>*/}
-                                {/*<ChevronsUpDown size={16}/>*/}
                             </div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="relative right-2 lg:right-4">

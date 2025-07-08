@@ -14,7 +14,7 @@ export function getAllCaseCategories(){
 }
 
 export function updateCaseCategory(id:string,data:Record<string, any>){
-      return http.put(`/case-category/${id}`, data)
+      return http.patch(`/case-category/${id}`, data)
 }
 
 export function deleteOneCaseCategory(){

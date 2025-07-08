@@ -13,7 +13,6 @@ import PageLoader from "@/components/ui/page-loader.tsx";
 import TextareaField from "@/components/form/textarea-field.tsx";
 import {toast} from "sonner";
 import {useState} from "react";
-import {Input} from "@/components/ui/input.tsx";
 
 
 
@@ -77,11 +76,11 @@ function CaseCategoryCreate() {
                 toast.error(error.response?.data?.message || "An unexpected error occurred.");
                 console.log(error)
             }).finally(()=>{
-                form.reset({
-                    category_name: "",
-                    category_code: "",
-                    category_description:""
-                })
+                // form.reset({
+                //     category_name: "",
+                //     category_code: "",
+                //     category_description:""
+                // })
                 setLoading(false);
             })
         }
@@ -100,7 +99,7 @@ function CaseCategoryCreate() {
                     <div className={cn("flex gap-2 items-center")}>
                         <Button className="p-1 rounded-full size-8 bg-accent hover:bg-stone-100" onClick={()=>navigate(-1)}> <ArrowLeft size={18} /></Button>
                         <h2 className="text-xl font-Poppins_Semibold text-stone-700">
-                            {primaryKey ? "Update category edit" : "New case category"}
+                            {primaryKey ? "Update case category" : "New case category"}
                         </h2>
                     </div>
                     {

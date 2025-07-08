@@ -9,7 +9,7 @@ export type MenuItem = {
     children?: MenuItem[]
 }
 
-const adminMenu: MenuItem [] = [
+const adminMenu: MenuItem []  = [
     {
       id: "dashboard",
       title: "Dashboard",
