@@ -6,7 +6,7 @@ function PageLoader({...props}) {
 
 return (
     <div className={cn("flex gap-2 justify-center items-center")}>
-        <LoaderCircle className="animate-spin" size={24}/> <span className={cn("text-sm")}> {props.children} </span>
+        <LoaderCircle className="animate-spin" stroke={"gray"} size={24}/> <span className={cn("text-sm")}> {props.children} </span>
     </div>
   )
 }

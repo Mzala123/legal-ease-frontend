@@ -30,7 +30,7 @@ const adminMenu: MenuItem []  = [
         children: [
             {
                id: "roles",
-               title: "Roles",
+               title: "Access",
                path: "/home/configurations/roles",
                icon: <ShieldUser size={16}/>
             },
