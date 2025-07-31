@@ -15,7 +15,6 @@ http.interceptors.response.use((response)=>{
     if (error.response.status === 401) {
         switch (error.response.status) {
             case 401:
-
                 break;
             default:
                 break;

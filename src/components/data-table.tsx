@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import {cn} from "@/lib/utils.ts";
 import {Input} from "@/components/ui/input.tsx";
-import {ForwardRefExoticComponent, ReactNode, RefAttributes, useState} from "react";
+import {ForwardRefExoticComponent, ReactNode, RefAttributes, useRef, useState} from "react";
 import {
     DropdownMenu, DropdownMenuContent,
     DropdownMenuItem,
@@ -85,15 +85,7 @@ export default function DataTable({rows, columns, actions, primaryKey, title, is
                 childComponents={{
                     table: {
                         elementAttributes: () => ({
-                            // className: "min-w-full table-fixed border-separate border-spacing-0"
-                            className: cn("border-separate border-spacing-0"),
-                            style: {
-                                minWidth: '100%',
-                                // On small screens, force `max-content`
-                                ['@media (max-width: 1024px)']: {
-                                    minWidth: 'max-content',
-                                },
-                            }
+                            className: cn("border-separate border-spacing-0 w-full lg:min-w-full min-w-max"),
                         })
                     },
                     tableHead: {
@@ -103,7 +95,7 @@ export default function DataTable({rows, columns, actions, primaryKey, title, is
                     },
                     headCell: {
                         elementAttributes: ({column})=> ({
-                            className: cn(`p-2 border-b border-stone-300 border-r text-left bg-stone-100 last:border-r-0 `, column.key === ':manage' && `sticky right-0 z-[2] bg-stone-100 border-l text-center max-w-${column.width} border-stone-300`),
+                            className: cn(`p-2 border-b border-stone-300 border-r text-left whitespace-nowrap bg-stone-100 last:border-r-0 `, column.key === ':manage' && `sticky right-0 z-[2] bg-stone-100 border-l text-center max-w-${column.width} border-stone-300`),
                             style: {
                                 minWidth: column.width ? `${column.width}px` : "auto",
                             }
@@ -112,7 +104,7 @@ export default function DataTable({rows, columns, actions, primaryKey, title, is
                     cell:{
                         elementAttributes: ({column})=>(
                             {
-                                className:cn(`px-4 py-2 text-sm border-b border-r border-stone-300 last:border-r-0 min-w-${column.width}`, column.key === ':manage' && 'sticky right-0 z-[2] bg-stone-100 border-l border-stone-300'),
+                                className:cn(`p-2 text-sm border-b border-r border-stone-300 last:border-r-0 min-w-${column.width}`, column.key === ':manage' && 'sticky right-0 z-[2] bg-stone-100 border-l border-stone-300'),
                             }
                         )
                     },
@@ -125,7 +117,7 @@ export default function DataTable({rows, columns, actions, primaryKey, title, is
                     cellText: {
                         content: (props)=>{
                                 if(actions && props.column.key === ":manage") {
-                                   return <div className={`max-w-${props.column.width} text-center`}>
+                                   return <div className={`max-w-${props.column.width} text-center `}>
                                        {TableActionBtn(actions, props)}
                                    </div>
                                 }
@@ -149,21 +141,42 @@ export default function DataTable({rows, columns, actions, primaryKey, title, is
 
 
 function TableActionBtn(actions: TableActionButtonsProps[], props: ICellTextProps) {
-      return <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-               <Button className={"bg-transparent hover:bg-stone-100 hover:rounded-full shadow-none"}>
-                   <EllipsisVertical size={16} className={"text-stone-500"}></EllipsisVertical>
-               </Button>
-          </DropdownMenuTrigger>
-                      <DropdownMenuContent className="relative right-2 lg:right-4">
-                          {
-                              actions.map((action, index) => {
-                                  return (<DropdownMenuItem className={action.className}
-                                  key={index}
-                                  onClick={()=>action.onClick(props)}>
-                              {action.icon && <action.icon className="mr-2 size-4"></action.icon>}
-                              <span>{action.label}</span>
-                          </DropdownMenuItem>) })}
-                      </DropdownMenuContent>
-      </DropdownMenu>
+    const [open, setOpen] = useState(false);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+
+    const handleOpenChange = (isOpen: boolean) => {
+        if (!isOpen) {
+            triggerRef.current?.focus();
+        }
+        setOpen(isOpen);
+    };
+
+    return (
+        <DropdownMenu open={open} onOpenChange={handleOpenChange}>
+            <DropdownMenuTrigger asChild className="">
+                <Button
+                    ref={triggerRef}
+                    className="bg-transparent hover:bg-stone-100 hover:rounded-full shadow-none"
+                    aria-label="Open actions menu"
+                >
+                    <EllipsisVertical size={16} className="text-stone-500" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="relative right-2 lg:right-4">
+                {actions.map((action, index) => (
+                    <DropdownMenuItem
+                        className={action.className}
+                        key={index}
+                        onClick={() => {
+                            action.onClick(props);
+                            setOpen(false);
+                        }}
+                    >
+                        {action.icon && <action.icon className="mr-2 size-4" />}
+                        <span>{action.label}</span>
+                    </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
 }

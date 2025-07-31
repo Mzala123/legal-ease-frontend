@@ -52,9 +52,6 @@ function CaseCategoryCreate() {
         }),
     })
 
-
-    // console.log(caseCategory)
-
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
         if (primaryKey) {
@@ -76,18 +73,11 @@ function CaseCategoryCreate() {
                 toast.error(error.response?.data?.message || "An unexpected error occurred.");
                 console.log(error)
             }).finally(()=>{
-                // form.reset({
-                //     category_name: "",
-                //     category_code: "",
-                //     category_description:""
-                // })
                 setLoading(false);
             })
         }
 
     }
-
-
 
     return (
         <div className={cn("")}>

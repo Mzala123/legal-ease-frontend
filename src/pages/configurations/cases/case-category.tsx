@@ -4,8 +4,10 @@ import {Pencil, Plus, Trash2} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import DataTable from "@/components/data-table.tsx";
 import {useQuery} from "@tanstack/react-query";
-import {getAllCaseCategories} from "@/services/endpoints.ts";
+import {deleteOneCaseCategory, getAllCaseCategories} from "@/services/endpoints.ts";
 import {DataType} from "ka-table";
+import {confirmDialog} from "@/components/dialog";
+import {toast} from "sonner";
 
 
 const columns = [
@@ -18,7 +20,7 @@ function CaseCategory(){
 
     const navigate = useNavigate();
 
-    const{data: caseCategories, isLoading, isFetching} =  useQuery({
+    const{data: caseCategories, isLoading, isFetching, refetch} =  useQuery({
         queryKey: ["category_id"],
         enabled: true,
         queryFn: ()=> getAllCaseCategories().then(({data})=> data),
@@ -35,7 +37,6 @@ function CaseCategory(){
                 </div>
                 <div className={cn("flex flex-col gap-4 w-full h-auto")}>
                         <DataTable
-                            className=""
                             title={"Case Categories"}
                             rows={caseCategories || []}
                             columns={columns}
@@ -47,16 +48,33 @@ function CaseCategory(){
                                     label: "Edit",
                                     icon: Pencil,
                                     className: "text-sm cursor-pointer gap-1",
-                                    onClick: (cell: Record<string, unknown>)=>{
-                                        console.log(cell.rowData);
+                                    onClick: (cell)=>{
+                                        console.log(cell.rowData.category_id
+                                        );
+                                      navigate(`/home/configurations/case-category/${cell.rowData.category_id}`);
                                     }
                                 },
                                 {
-                                    label: <span className="text-destructive">Delete</span>,
+                                    label: "Delete",
                                     icon: Trash2,
                                     className: "text-sm cursor-pointer gap-1 text-destructive",
-                                    onClick: (cell : Record<string, unknown>)=>{
-                                        console.log(cell);
+                                    onClick: (cell )=>{
+                                        confirmDialog({
+                                            title: "Are you absolutely sure?",
+                                            description: "Deleting removes this record in its entirety",
+                                            confirmText: "Confirm",
+                                            cancelText: "Cancel",
+                                        }).then(() => {
+                                            deleteOneCaseCategory(cell.rowData.category_id).then((response)=>{
+                                                toast.success(response.data.message);
+                                                refetch();
+                                            }).catch(err=>{
+                                                toast.error(err.response?.data?.message || "An unexpected error occurred.");
+                                            })
+                                        }).catch(err => {
+                                            toast.error(err.message);
+                                        })
+
                                     }
                                 }
                             ]}
