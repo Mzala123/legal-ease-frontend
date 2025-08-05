@@ -11,6 +11,10 @@ const Roles = React.lazy(()=>import("../pages/configurations/roles"))
 const CaseCategoryList = React.lazy(()=>import("../pages/configurations/cases/case-category"))
 const CaseCategoryCreate = React.lazy(()=>import("../pages/configurations/cases/case-category-create"))
 
+const FinancialYearList = React.lazy(()=>import("../pages/configurations/financial-year-list"))
+const FinancialYearAdd = React.lazy(()=>import("../pages/configurations/financial-year-add"))
+
+
 const routes = createBrowserRouter(
     [
         {
@@ -35,6 +39,22 @@ const routes = createBrowserRouter(
                         {
                             path: "roles",
                             element: <SuspendedPage page={<Roles/>}/>
+                        },
+                        {
+                            path: "financial-year",
+                            children: [
+                                {
+                                    path: "",
+                                    element: <SuspendedPage page={<FinancialYearList/>}/>
+                                },
+                                {
+                                    path: ":financial_year_id",
+                                    loader: ({params}) => {
+                                        return {pageName: isPrimaryKey(params.financial_year_id as unknown as string) ? "Edit" : "Add"};
+                                    },
+                                    element: <SuspendedPage page={<FinancialYearAdd/>}/>
+                                }
+                            ]
                         },
                         {
                             path: "case-category",

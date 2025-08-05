@@ -1,7 +1,28 @@
 import http from "@/services/api.ts";
 
+// financial year
 
-export function createCaseCategory(data: Record<string, any>) {
+export function createFinancialYear(data: Record<string, unknown>){
+    return http.post("/financial-year", data);
+}
+
+export function getFinancialYear(){
+    return http.get<Record<string, number | boolean | string>[]>(`/financial-year`)
+}
+
+export function getOneFinancialYear(id: string ){
+    return http.get(`/financial-year/${id}`)
+}
+
+export function updateFinancialYear(id: string, data: Record<string, unknown>){
+    return http.post(`/financial-year/${id}`, data);
+}
+export function deleteFinancialYear(id: number){
+    return http.delete(`/financial-year/${id}`)
+}
+
+// case categories
+export function createCaseCategory(data: Record<string, unknown>) {
    return http.post(`/case-category`, data)
 }
 
@@ -13,7 +34,7 @@ export function getAllCaseCategories(){
    return http.get<Record<string, number | boolean | string>[]>(`/case-category`)
 }
 
-export function updateCaseCategory(id:string,data:Record<string, any>){
+export function updateCaseCategory(id:string,data:Record<string, unknown>){
       return http.patch(`/case-category/${id}`, data)
 }
 

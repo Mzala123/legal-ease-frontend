@@ -26,9 +26,6 @@ function CaseCategory(){
         queryFn: ()=> getAllCaseCategories().then(({data})=> data),
     })
 
-    console.log(caseCategories);
-    console.log(isLoading);
-
     return (
         <div className={cn("flex flex-col gap-4 mx-auto w-full h-full lg:w-[80%] 2xl:w-[60%]")}>
             <div className={cn("flex flex-col gap-4 text-sm w-full h-full")}>
@@ -90,7 +87,6 @@ function CaseCategory(){
                         </DataTable>
                 </div>
             </div>
-
         </div>
     )
 }

@@ -45,7 +45,7 @@ function SubmenuDropdown({menuList}: {menuList: MenuItem[]}) {
                                                             const subLinkIsActive: boolean = location.pathname === child.path
                                                             return (
                                                                 <Link key={child.id} className={cn("ml-4 relative flex items-center gap-2 mt-1 px-3 py-[6px] hover:rounded-l hover:bg-stone-100 hover:text-primary", subLinkIsActive && "text-primary bg-stone-100 rounded-l")} to={child.path}>
-                                                                    <span className="">{child.icon && child.icon}</span>
+                                                                    <span className={cn(subLinkIsActive && "text-primary stroke-primary")}>{child.icon && child.icon}</span>
                                                                     {child.title}
                                                                 </Link>
                                                             )

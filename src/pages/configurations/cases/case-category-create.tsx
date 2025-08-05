@@ -49,6 +49,8 @@ function CaseCategoryCreate() {
                 category_description: data.category_description
             });
             return data;
+        }).catch((error)=>{
+            toast.error(error.response?.data?.message || "An unexpected error occurred.");
         }),
     })
 
@@ -60,7 +62,7 @@ function CaseCategoryCreate() {
                 toast.success(data.message);
                 navigate(-1);
             }).catch(error => {
-                toast.error(error.message);
+                toast.error(error.response?.data?.message || "An unexpected error occurred.");
             }).finally(()=>{
                 setLoading(false);
             })
