@@ -9,7 +9,7 @@ type SideBarProps = {
 export default function Sidebar({isOpen}: SideBarProps) {
 
     return (
-        <div className={cn("fixed z-10 min-w-64 w-64 shadow-md border-r h-screen transition-all ease-in-out bg-white border-stone-300 -left-64 lg:shadow-none", isOpen && "left-0")}>
+        <div className={cn("fixed z-10 min-w-64 w-64 shadow-2xl border-r h-screen transition-all ease-in-out bg-white border-stone-300 -left-64 lg:shadow-none", isOpen && "left-0")}>
             <div className="h-12 flex items-center justify-between border-b border-stone-300 left-0 right-0">
                <div className="mt-16 font-Poppins_Semibold hidden lg:mt-0 pl-4 pt-4 lg:pt-0 lg:flex">LegalEase</div>
            </div>

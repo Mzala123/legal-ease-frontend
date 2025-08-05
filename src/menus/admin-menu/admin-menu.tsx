@@ -1,4 +1,13 @@
-import {CalendarCog, Columns3Cog, Group, LayoutDashboard, SettingsIcon, ShieldUser, UserCircle} from "lucide-react";
+import {
+    CalendarCog,
+    Columns3Cog,
+    Group,
+    LayoutDashboard,
+    Network,
+    SettingsIcon,
+    ShieldUser,
+    UserCircle
+} from "lucide-react";
 import {JSX} from "react";
 
 export type MenuItem = {
@@ -39,6 +48,12 @@ const adminMenu: MenuItem []  = [
                 title: "Financial Years",
                 path: "/home/configurations/financial-year",
                 icon: <CalendarCog size={16}/>
+            },
+            {
+                id: "departments",
+                title: "Departments",
+                path: "/home/configurations/departments",
+                icon: <Network size={16}/>
             },
             {
                 id: "case-category",

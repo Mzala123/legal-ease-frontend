@@ -8,11 +8,18 @@ const Login = React.lazy(()=>import("../pages/auth/Login"))
 const Register = React.lazy(()=>import("../pages/auth/Register"))
 
 const Roles = React.lazy(()=>import("../pages/configurations/roles"))
-const CaseCategoryList = React.lazy(()=>import("../pages/configurations/cases/case-category"))
-const CaseCategoryCreate = React.lazy(()=>import("../pages/configurations/cases/case-category-create"))
 
 const FinancialYearList = React.lazy(()=>import("../pages/configurations/financial-year-list"))
 const FinancialYearAdd = React.lazy(()=>import("../pages/configurations/financial-year-add"))
+
+
+
+const CaseCategoryList = React.lazy(()=>import("@/pages/configurations/departments/case-category"))
+const CaseCategoryCreate = React.lazy(()=>import("@/pages/configurations/departments/case-category-create"))
+
+const DepartmentList = React.lazy(()=>import("../pages/configurations/departments/departments-list"))
+const DepartmentAdd = React.lazy(()=>import("../pages/configurations/departments/departments-add"))
+
 
 
 const routes = createBrowserRouter(
@@ -55,6 +62,23 @@ const routes = createBrowserRouter(
                                     element: <SuspendedPage page={<FinancialYearAdd/>}/>
                                 }
                             ]
+                        },
+                        {
+                            path: "departments",
+                            children: [
+                                {
+                                    path: "",
+                                    element: <SuspendedPage page={<DepartmentList/>}/>
+                                },
+                                {
+                                    path: ":department_id",
+                                    loader: ({params}) => {
+                                        return {pageName: isPrimaryKey(params.department_id as unknown as string) ? "Edit" : "Add"};
+                                    },
+                                    element: <SuspendedPage page={<DepartmentAdd/>}/>
+                                }
+                            ]
+
                         },
                         {
                             path: "case-category",

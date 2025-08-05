@@ -44,8 +44,12 @@ function SubmenuDropdown({menuList}: {menuList: MenuItem[]}) {
                                                         {openSubmenuId.includes(menu.id) && menu.children.map((child: MenuItem) => {
                                                             const subLinkIsActive: boolean = location.pathname === child.path
                                                             return (
-                                                                <Link key={child.id} className={cn("ml-4 relative flex items-center gap-2 mt-1 px-3 py-[6px] hover:rounded-l hover:bg-stone-100 hover:text-primary", subLinkIsActive && "text-primary bg-stone-100 rounded-l")} to={child.path}>
-                                                                    <span className={cn(subLinkIsActive && "text-primary stroke-primary")}>{child.icon && child.icon}</span>
+                                                                <Link key={child.id} className={cn("ml-4 relative flex items-center gap-2 mt-1 px-3 py-[6px] hover:rounded-l hover:bg-stone-100 hover:stroke-primary hover:text-primary", subLinkIsActive && "text-primary bg-stone-100 rounded-l")} to={child.path}>
+                                                                    <span className={cn(subLinkIsActive && "text-primary stroke-primary")}>{child.icon &&
+                                                                        (
+                                                                            <child.icon.type {...child.icon.props} className={cn("", subLinkIsActive && "text-primary stroke-primary")} />
+                                                                        )
+                                                                    }</span>
                                                                     {child.title}
                                                                 </Link>
                                                             )
@@ -61,7 +65,15 @@ function SubmenuDropdown({menuList}: {menuList: MenuItem[]}) {
                                         <div className={cn("flex items-center hover:bg-stone-100 hover:text-primary w-full", linkIsActive && "bg-stone-100")}>
                                             <div className={cn(`bg-transparent h-4 w-[3px] rounded-2xl ml-[0.5px] hover:text-primary`,  linkIsActive && "bg-primary")}></div>
                                             <Link to={`${menu.path}`} className={cn("flex justify-between w-full py-[6px] px-3", linkIsActive && "text-primary")}>
-                                                <div className="flex items-center gap-2"><span className="">{menu.icon}</span>{menu.title}<span></span> </div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className={cn("",linkIsActive && "text-primary")}>{
+                                                        menu.icon &&
+                                                          (
+                                                              <menu.icon.type {...menu.icon.props} className={cn("", linkIsActive && "text-primary stroke-primary")} />
+                                                          )
+                                                    }</span>
+                                                    <span className={cn("",linkIsActive && "text-primary")}>{menu.title}</span>
+                                                </div>
                                             </Link>
                                         </div>
                                     )
