@@ -57,7 +57,7 @@ const adminMenu: MenuItem []  = [
             },
             {
                 id: "case-category",
-                title: "Case category",
+                title: "Cases categories",
                 path: "/home/configurations/case-category",
                 icon: <Group size={16}/>,
             }

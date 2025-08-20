@@ -8,11 +8,12 @@ import {Form} from "@/components/ui/form.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {ArrowLeft, Info} from "lucide-react";
 import {useQuery} from "@tanstack/react-query";
-import {createCaseCategory, getOneCaseCategory, updateCaseCategory} from "@/services/endpoints.ts";
+import {createCaseCategory, getDepartmentList, getOneCaseCategory, updateCaseCategory} from "@/services/endpoints.ts";
 import PageLoader from "@/components/ui/page-loader.tsx";
 import TextareaField from "@/components/form/textarea-field.tsx";
 import {toast} from "sonner";
 import {useState} from "react";
+import Combobox from "@/components/form/combobox.tsx";
 
 
 
@@ -20,6 +21,7 @@ const formSchema = z.object({
     category_name: z.string().trim().min(1,{message: "Case category name is required"}),
     category_code: z.string({message: "Case category code should be a string"}).trim(),
     category_description: z.string().trim().min(1, {message: "Case category description is required"}),
+    department_id: z.string().trim().min(1, {message: "Department id is required"}),
 })
 
 function CaseCategoryCreate() {
@@ -39,14 +41,15 @@ function CaseCategoryCreate() {
         }
     })
 
-    const {isLoading, isFetching} = useQuery({
+    const {isLoading} = useQuery({
         queryKey: ["case-category",primaryKey],
         enabled: !!primaryKey,
         queryFn: () => getOneCaseCategory(params.case_id as unknown as string).then(({data}) =>{
             form.reset({
                 category_name: data.category_name,
                 category_code: data.category_code,
-                category_description: data.category_description
+                category_description: data.category_description,
+                department_id: data.department_id,
             });
             return data;
         }).catch((error)=>{
@@ -54,8 +57,23 @@ function CaseCategoryCreate() {
         }),
     })
 
+    const{data: departments, isFetching} = useQuery({
+        queryKey: ["department_id"],
+        enabled: true,
+        queryFn: ()=>getDepartmentList().then((response)=>{
+            return response.data;
+        }).catch((err)=>{
+            if(!err.response){
+                toast.error("Server not running or cannot be reached");
+            }else{
+                toast.error(err.response?.data?.message || "An unexpected error occurred.");
+            }
+        })
+    });
+
+
+
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
         if (primaryKey) {
             setLoading(!loading);
             updateCaseCategory(params.case_id as unknown as string, values).then(({data}) =>{
@@ -79,6 +97,10 @@ function CaseCategoryCreate() {
             })
         }
 
+    }
+
+    if (isFetching) {
+        return <PageLoader />;
     }
 
     return (
@@ -123,6 +145,19 @@ function CaseCategoryCreate() {
                                             type="text"
                                             placeholder=""
                                             className={cn("w-full")}
+                                        />
+
+                                        <Combobox
+                                            name="department_id"
+                                            control={form.control}
+                                            label="Department"
+                                            isRequired={true}
+                                            options={departments?.map((d)=>{
+                                              return {
+                                                value: d.department_id,
+                                                label: String(d.department_name)
+                                              }
+                                            }) || [] }
                                         />
 
                                         <TextareaField

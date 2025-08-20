@@ -41,3 +41,26 @@ export function updateCaseCategory(id:string,data:Record<string, unknown>){
 export function deleteOneCaseCategory(id:string){
     return http.delete(`/case-category/${id}`)
 }
+
+
+// law firm departments
+
+export function createDepartments(data: Record<string, unknown>){
+    return http.post(`/departments`, data)
+}
+
+export function getDepartmentByPk(id:string){
+    return http.get(`/departments/${id}`)
+}
+
+export function getDepartmentList(){
+    return http.get<Record<string, number | boolean | string>[]>(`/departments`)
+}
+
+export function updateDepartment(id:string,data:Record<string, unknown>){
+    return http.patch(`/departments/${id}`, data)
+}
+
+export function deleteDepartment(id:string){
+    return http.delete(`/departments/${id}`)
+}

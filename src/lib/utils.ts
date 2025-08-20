@@ -9,5 +9,8 @@ export function isPrimaryKey(key: string | "+" | undefined) {
     return key && key !== "+" ? key : false;
 }
 
-
-
+export type Option = {
+    value: string | number | boolean,
+    label: string,
+    disabled?: boolean
+}

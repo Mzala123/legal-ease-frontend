@@ -60,8 +60,7 @@ export default function FinancialYearAdd(){
     })
 
     function onSubmit(values: z.infer<typeof formSchema>){
-        console.log(values)
-        return
+
          if(primaryKey){
              setLoading(true);
              updateFinancialYear(financial_year_id as unknown as string,  values).then(({data}) => {

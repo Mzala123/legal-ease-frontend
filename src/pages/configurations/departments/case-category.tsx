@@ -1,6 +1,6 @@
 import {cn} from "@/utils.ts";
 import {Button} from "@/components/ui/button.tsx";
-import {Pencil, Plus, Trash2} from "lucide-react";
+import {Eye, Pencil, Plus, Trash2} from "lucide-react";
 import {useNavigate} from "react-router-dom";
 import DataTable from "@/components/data-table.tsx";
 import {useQuery} from "@tanstack/react-query";
@@ -13,7 +13,6 @@ import {toast} from "sonner";
 const columns = [
     {key:"category_name", title: "Category name", dataType: DataType.String, width: 100},
     {key:"category_code", title: "Category code", dataType: DataType.String, width: 100},
-    {key:"category_description", title: "Category description", dataType: DataType.String, width: 340},
 ]
 
 function CaseCategory(){
@@ -41,6 +40,16 @@ function CaseCategory(){
                             isLoading={isLoading}
                             isFetching={isFetching}
                             actions={[
+                                {
+                                    label: "View",
+                                    icon: Eye,
+                                    className: "text-sm cursor-pointer gap-1",
+                                    onClick: (cell)=>{
+                                        console.log(cell.rowData.category_id
+                                        );
+                                       // navigate(`/home/configurations/case-category/${cell.rowData.category_id}`);
+                                    }
+                                },
                                 {
                                     label: "Edit",
                                     icon: Pencil,

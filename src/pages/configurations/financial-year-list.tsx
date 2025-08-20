@@ -10,6 +10,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {toast} from "sonner";
 
 
+
 const columns = [
     {key:"name", title: "Financial year name", dataType: DataType.String, width: 100},
     {key:"start_date", title: "Start date", dataType: DataType.Date, width: 100},
@@ -22,14 +23,30 @@ function FinancialYearList(){
 
     const{data: financialYear , isFetching, isLoading, refetch}=useQuery({
 
-        queryKey: ['category_name'],
+        queryKey: ['name'],
         enabled: true,
         queryFn: () => getFinancialYear().then((response)=>{
             return response.data;
-        }).catch((error)=>{
-           toast.error(error.response?.data?.message || "An unexpected error occurred.");
+        }).catch((err)=>{
+            if(!err.response){
+                toast.error("Server not running or cannot be reached");
+            }else{
+                toast.error(err.response?.data?.message || "An unexpected error occurred.");
+            }
+
         })
     })
+
+/*
+    if(isError){
+        return <Alert className="bg-destructive-foreground">
+            <TriangleAlert/>
+            <AlertTitle>Heads up!</AlertTitle>
+            <AlertDescription>
+                You can add components and dependencies to your app using the cli.
+            </AlertDescription>
+        </Alert>
+    }*/
 
     console.log(financialYear);
 
