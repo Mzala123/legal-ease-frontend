@@ -92,7 +92,7 @@ export default function DepartmentsAdd() {
                     <div className={cn("flex gap-2 items-center")}>
                         <Button className="p-1 rounded-full size-8 bg-accent hover:bg-stone-100" onClick={()=>navigate(-1)}> <ArrowLeft size={18} /></Button>
                         <h2 className="text-xl font-Poppins_Semibold text-stone-700">
-                            {primaryKey ? "Update financial year" : "New financial year"}
+                            {primaryKey ? "Update Department" : "New Department"}
                         </h2>
                     </div>
                     {
@@ -103,7 +103,7 @@ export default function DepartmentsAdd() {
                                             <div className={cn("flex flex-col gap-2")}>
                                                 <p className="text-sm flex gap-1 items-center">
                                                     <span><Info size={16} className={"stroke-primary"}/></span>
-                                                    <span>Financial year instances include 2024/2025.</span>
+                                                    <span>Department instance Corporate & Commercial Law.</span>
                                                 </p>
                                                 <p className="text-xs">Required fields are marked with an asterisk  <span className="text-destructive">*</span></p>
                                             </div>
