@@ -1,4 +1,5 @@
 import http from "@/services/api.ts";
+import {CaseCategory, Department} from "@/types/models.ts";
 
 // financial year
 
@@ -27,11 +28,11 @@ export function createCaseCategory(data: Record<string, unknown>) {
 }
 
 export function getOneCaseCategory(id:string){
-   return http.get(`/case-category/${id}`)
+   return http.get<CaseCategory>(`/case-category/${id}`)
 }
 
 export function getAllCaseCategories(){
-   return http.get<Record<string, number | boolean | string>[]>(`/case-category`)
+   return http.get<CaseCategory[]>(`/case-category`)
 }
 
 export function updateCaseCategory(id:string,data:Record<string, unknown>){
@@ -45,19 +46,19 @@ export function deleteOneCaseCategory(id:string){
 
 // law firm departments
 
-export function createDepartments(data: Record<string, unknown>){
+export function createDepartments(data: Partial<Department>){
     return http.post(`/departments`, data)
 }
 
 export function getDepartmentByPk(id:string){
-    return http.get(`/departments/${id}`)
+    return http.get<Department>(`/departments/${id}`)
 }
 
 export function getDepartmentList(){
-    return http.get<Record<string, number | boolean | string>[]>(`/departments`)
+    return http.get<Department[]>(`/departments`)
 }
 
-export function updateDepartment(id:string,data:Record<string, unknown>){
+export function updateDepartment(id:string,data: Partial<Department>){
     return http.patch(`/departments/${id}`, data)
 }
 

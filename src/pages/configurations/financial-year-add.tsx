@@ -12,6 +12,8 @@ import {ArrowLeft, Info} from "lucide-react";
 import PageLoader from "@/components/ui/page-loader.tsx";
 import {Form} from "@/components/ui/form.tsx";
 import InputField from "@/components/form/input-field.tsx";
+import DateField from "@/components/form/date-picker.tsx";
+
 
 
 
@@ -22,7 +24,7 @@ const formSchema = z.object({
 }).refine(data => data.end_date >= data.start_date,
     {
         path: ['end_date'],
-        message: 'End date is cannot be before start date',
+        message: 'End date cannot be before start date',
     }
 );
 
@@ -118,29 +120,28 @@ export default function FinancialYearAdd(){
                                                 isRequired={true}
                                                 className={cn("w-full")}
                                             />
-                                            <div>
-
-                                                {/*<DatepickerField*/}
-                                                {/*    name="start_date"*/}
-                                                {/*    control={form.control}*/}
-                                                {/*    isRequired={false}*/}
-                                                {/*    className={cn("")}*/}
-                                                {/*    label="Start date"*/}
-                                                {/*/>*/}
-                                                {/*<DatepickerField*/}
-                                                {/*    name="end_date"*/}
-                                                {/*    control={form.control}*/}
-                                                {/*    isRequired={false}*/}
-                                                {/*    className={cn("")}*/}
-                                                {/*    label="End date"*/}
-                                                {/*/>*/}
+                                            <div className={cn("flex flex-col space-y-6")}>
+                                                <DateField
+                                                    name="start_date"
+                                                    control={form.control}
+                                                    isRequired={false}
+                                                    className={cn("")}
+                                                    label="Start date"
+                                                />
+                                                <DateField
+                                                    name="end_date"
+                                                    control={form.control}
+                                                    isRequired={false}
+                                                    className={cn("")}
+                                                    label="End date"
+                                                />
                                             </div>
 
                                             <div>
                                                 <Button
                                                     type={"submit"}
-                                                //     disabled={!form.formState.isValid || !form.formState.isDirty}
-                                                //     className={cn("font-Poppins_Semibold flex gap-0", (!form.formState.isValid || !form.formState.isDirty) && "bg-accent text-stone-400 cursor-not-allowed")}
+                                                    disabled={!form.formState.isValid || !form.formState.isDirty}
+                                                    className={cn("font-Poppins_Semibold flex gap-0", (!form.formState.isValid || !form.formState.isDirty) && "bg-accent text-stone-400 cursor-not-allowed")}
                                                 >
                                                     {loading ? <PageLoader> Saving... </PageLoader>  :  <span> Save</span>}
                                                 </Button>

@@ -18,28 +18,27 @@ import {
 import {Button} from "@/components/ui/button.tsx";
 import PageLoader from "@/components/ui/page-loader.tsx";
 
-type tableData = Record<string, unknown>
 
-type TableProps = {
+interface TableProps<T> {
    title?: string
-   rows: tableData []
-   columns: Column []
+   rows: T[]
+   columns: Column[]
    primaryKey : string
    isLoading?: boolean
    isFetching?: boolean
-   actions?: TableActionButtonsProps []
+   actions?: TableActionButtonsProps<T>[]
    children?: ReactNode
 }
 
-type TableActionButtonsProps = {
+interface TableActionButtonsProps<T> {
     icon? : ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
     label : string
     className?: string
-    onClick: (cell :ICellTextProps) => void
+    onClick: (cell :ICellTextProps<T>) => void
 }
 
 
-export default function DataTable({rows, columns, actions, primaryKey, title, isLoading, isFetching, children} : TableProps) {
+export default function DataTable<T>({rows, columns, actions, primaryKey, title, isLoading, isFetching, children} : TableProps<T>) {
 
     const [searchText, setSearchText] = useState('');
 
@@ -140,7 +139,7 @@ export default function DataTable({rows, columns, actions, primaryKey, title, is
 }
 
 
-function TableActionBtn(actions: TableActionButtonsProps[], props: ICellTextProps) {
+function TableActionBtn<T>(actions: TableActionButtonsProps<T>[], props: ICellTextProps) {
     const [open, setOpen] = useState(false);
     const triggerRef = useRef<HTMLButtonElement>(null);
 

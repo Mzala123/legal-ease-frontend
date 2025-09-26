@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const http = axios.create({
-    baseURL: "http://localhost:3000/api/",
+    baseURL: "http://localhost:3002/api/",
     timeout: 5000,
     headers: {
         "Accept": "application/json",
@@ -15,6 +15,8 @@ http.interceptors.response.use((response)=>{
     if (error.response.status === 401) {
         switch (error.response.status) {
             case 401:
+                break;
+            case 404:
                 break;
             default:
                 break;
