@@ -1,5 +1,5 @@
 import http from "@/services/api.ts";
-import {CaseCategory, Department} from "@/types/models.ts";
+import {CaseCategory, Department, FinancialYear} from "@/types/models.ts";
 
 // financial year
 
@@ -8,7 +8,7 @@ export function createFinancialYear(data: Record<string, unknown>){
 }
 
 export function getFinancialYear(){
-    return http.get<Record<string, number | boolean | string>[]>(`/financial-year`)
+    return http.get<FinancialYear[]>(`/financial-year`)
 }
 
 export function getOneFinancialYear(id: string ){
@@ -18,7 +18,7 @@ export function getOneFinancialYear(id: string ){
 export function updateFinancialYear(id: string, data: Record<string, unknown>){
     return http.post(`/financial-year/${id}`, data);
 }
-export function deleteFinancialYear(id: number){
+export function deleteFinancialYear(id: string){
     return http.delete(`/financial-year/${id}`)
 }
 
