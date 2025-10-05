@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const http = axios.create({
-    baseURL: "http://localhost:3002/api/",
+    // baseURL: "http://localhost:3002/api/",
+    baseURL: "https://legal-ease-api-server-7596b71dea11.herokuapp.com/api/",
     timeout: 5000,
     headers: {
         "Accept": "application/json",
